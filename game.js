@@ -18,6 +18,7 @@ function Bear() {
   };
 }
 
-function start() { //create bear 
-  bear = new Bear(); 
+function start() {
+  //create bear
+  bear = new Bear();
 }
