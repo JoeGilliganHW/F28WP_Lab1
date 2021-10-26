@@ -38,6 +38,8 @@ function Bear() {
     this.y += this.dBear * yDir;
     this.display();
   };
+
+  this.setSpeed = function () {};
 }
 
 function start() {
