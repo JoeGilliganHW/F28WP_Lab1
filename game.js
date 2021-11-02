@@ -181,3 +181,27 @@ function makeBees() {
     i++;
   }
 }
+
+function moveBees() {
+  //get speed input field value
+  let speed = document.getElementById("speedBees").value;
+
+  //move each bee to a random location
+  for (let i = 0; i < bees.length; i++) {
+    let dx = getRandomInt(2 * speed) - speed;
+    let dy = getRandomInt(2 * speed) - speed;
+    bees[i].move(dx, dy);
+  }
+}
+
+// update loop for game
+function updateBees(value) {
+  //move the bees randomly
+  moveBees();
+
+  //use a fixed update period
+  let period = value; //modify this to control refresh period
+
+  //update the timer for the next move
+  updateTimer = setTimeout("updateBees()", period);
+}
