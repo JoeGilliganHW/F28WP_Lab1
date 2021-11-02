@@ -33,13 +33,15 @@ function Bear() {
   };
 
   this.move = function (xDir, yDir) {
-    this.fitBounds(); //we add this instruction to keep bear within board
     this.x += this.dBear * xDir;
     this.y += this.dBear * yDir;
+    this.fitBounds(); //we add this instruction to keep bear within board
     this.display();
   };
 
-  this.setSpeed = function () {};
+  this.setSpeed = function (value) {
+    this.dBear = value * 100;
+  };
 }
 
 function start() {
