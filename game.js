@@ -57,6 +57,9 @@ function start() {
   //create bees
   makeBees();
 
+  //take start time
+  //////////// lastStingTime = new Date();
+
   //move the bees
   updateBees();
 }
@@ -194,7 +197,7 @@ function moveBees() {
     let dx = getRandomInt(2 * speed) - speed;
     let dy = getRandomInt(2 * speed) - speed;
     bees[i].move(dx, dy);
-    isHit(bees[i], bear);
+    // isHit(bees[i], bear);
   }
 }
 
@@ -206,65 +209,63 @@ function updateBees() {
   //use a fixed update period
   let period = document.getElementById("periodTimer").value; //modify this to control refresh period
 
-  if (isHit.score >= 1000){
-    clearTimeout();
-    alert("Game over! YOu were stung 1000 times! Your score was:" + )
-  }
+  // if (isHit.score >= 1000){
+  //   clearTimeout();
+  //   alert("Game over! YOu were stung 1000 times! Your score was:" + )
+  // }
   //update the timer for the next move
   updateTimer = setTimeout("updateBees()", period);
-
 }
 
-function isHit(defender, offender) { 
+function isHit(defender, offender) {
   //check if the two image overlap
-  if (overlap(defender, offender)) { 
-    let score = hits.innerHTML; 
+  if (overlap(defender, offender)) {
+    let score = hits.innerHTML;
 
     //increment the score
-    score = Number(score) + 1; 
-    
+    score = Number(score) + 1;
+
     //display the new score
     hits.innerHTML = score;
 
-    //calculate longest duration 
-    let newStingTime = new Date(); 
-    let thisDuration = newStingTime - lastStingTime; 
-    lastStingTime = newStingTime; 
-    let longestDuration = Number(duration.innerHTML); 
-    if (longestDuration === 0) { 
-      longestDuration = thisDuration; 
-    } else { 
-      if (longestDuration < thisDuration) longestDuration = thisDuration; 
-    } 
+    //calculate longest duration
+    let newStingTime = new Date();
+    let thisDuration = newStingTime - lastStingTime;
+    lastStingTime = newStingTime;
+    let longestDuration = Number(duration.innerHTML);
+    if (longestDuration === 0) {
+      longestDuration = thisDuration;
+    } else {
+      if (longestDuration < thisDuration) longestDuration = thisDuration;
+    }
     document.getElementById("duration").innerHTML = longestDuration;
-  } 
+  }
 }
 
-function overlap(element1, element2){
-
+function overlap(element1, element2) {
   //the photos are actually rectangles wrapping the elements
-  
+
   //rectangle of the first element
-  left1 = element1.htmlElement.offsetLeft; 
-  top1 = element1.htmlElement.offsetTop; 
-  right1 = element1.htmlElement.offsetLeft + element1.htmlElement.offsetWidth; 
-  tom1 = element1.htmlElement.offsetTop + element1.htmlElement.offsetHeight; 
-  
-  //rectangle of the second element 
-  left2 = element2.htmlElement.offsetLeft; //e2x 
-  top2 = element2.htmlElement.offsetTop; //e2y 
-  right2 = element2.htmlElement.offsetLeft + element2.htmlElement.offsetWidth; 
-  tom2 = element2.htmlElement.offsetTop + element2.htmlElement.offsetHeight; 
-  
-  //calculate the intersection of the two rectangles 
-  x_intersect = Math.max(0, Math.min(right1, right2) - Math.max(left1, left2)); 
-  y_intersect = Math.max(0, Math.min(bottom1, bottom2) - Math.max(top1, top2)); 
-  intersectArea = x_intersect * y_intersect; 
-  
-  //if intersection is nil no hit 
-  if (intersectArea == 0 || isNaN(intersectArea)) { 
-    return false; 
-  } 
-  
+  left1 = element1.htmlElement.offsetLeft;
+  top1 = element1.htmlElement.offsetTop;
+  right1 = element1.htmlElement.offsetLeft + element1.htmlElement.offsetWidth;
+  tom1 = element1.htmlElement.offsetTop + element1.htmlElement.offsetHeight;
+
+  //rectangle of the second element
+  left2 = element2.htmlElement.offsetLeft; //e2x
+  top2 = element2.htmlElement.offsetTop; //e2y
+  right2 = element2.htmlElement.offsetLeft + element2.htmlElement.offsetWidth;
+  tom2 = element2.htmlElement.offsetTop + element2.htmlElement.offsetHeight;
+
+  //calculate the intersection of the two rectangles
+  x_intersect = Math.max(0, Math.min(right1, right2) - Math.max(left1, left2));
+  y_intersect = Math.max(0, Math.min(bottom1, bottom2) - Math.max(top1, top2));
+  intersectArea = x_intersect * y_intersect;
+
+  //if intersection is nil no hit
+  if (intersectArea == 0 || isNaN(intersectArea)) {
+    return false;
+  }
+
   return true;
 }
