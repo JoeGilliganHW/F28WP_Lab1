@@ -45,20 +45,21 @@ function Bear() {
 }
 
 function start() {
+  console.clear();
   //create bear
   bear = new Bear();
 
-  //Add an event lsitener to the keypress event
-  document.addEventListener("keydown", moveBear, false);
+  //take start time
+  lastStingTime = new Date();
 
   //create new array for bees
   bees = new Array();
 
+  //Add an event lsitener to the keypress event
+  document.addEventListener("keydown", moveBear, false);
+
   //create bees
   makeBees();
-
-  //take start time
-  //////////// lastStingTime = new Date();
 
   //move the bees
   updateBees();
@@ -164,13 +165,14 @@ function getRandomInt(max) {
   return Math.random() * max;
 }
 
-function makeBees() {
+function makeBees(value) {
   //get number of bees specified by the user
   let nbBees = document.getElementById("nbBees").value;
 
   //try converting the content of the input to a number
   nbBees = Number(nbBees);
 
+  nbBees = nbBees - bees.length;
   //check that the input field contains a valid number
   if (isNaN(nbBees)) {
     window.alert("Invalid number of bees");
@@ -197,35 +199,34 @@ function moveBees() {
     let dx = getRandomInt(2 * speed) - speed;
     let dy = getRandomInt(2 * speed) - speed;
     bees[i].move(dx, dy);
-    // isHit(bees[i], bear);
+    isHit(bees[i], bear);
   }
 }
 
 // update loop for game
 function updateBees() {
+  if (isHit.score >= 1000) {
+    clearTimeout();
+    alert("Game over! YOu were stung 1000 times! Your score was:");
+    console.log("You dead bro");
+  }
+
   //move the bees randomly
   moveBees();
-
   //use a fixed update period
   let period = document.getElementById("periodTimer").value;
 
   //update the timer for the next move
   updateTimer = setTimeout("updateBees()", period);
-
-  if (isHit.score >= 1000) {
-    clearTimeout();
-    alert("Game over! YOu were stung 1000 times! Your score was:");
-  }
 }
 
 function isHit(defender, offender) {
   //check if the two image overlap
   if (overlap(defender, offender)) {
     let score = hits.innerHTML;
-
     //increment the score
     score = Number(score) + 1;
-
+    console.log(score);
     //display the new score
     hits.innerHTML = score;
 
@@ -245,18 +246,16 @@ function isHit(defender, offender) {
 
 function overlap(element1, element2) {
   //the photos are actually rectangles wrapping the elements
-
   //rectangle of the first element
   left1 = element1.htmlElement.offsetLeft;
   top1 = element1.htmlElement.offsetTop;
   right1 = element1.htmlElement.offsetLeft + element1.htmlElement.offsetWidth;
-  tom1 = element1.htmlElement.offsetTop + element1.htmlElement.offsetHeight;
-
+  bottom1 = element1.htmlElement.offsetTop + element1.htmlElement.offsetHeight;
   //rectangle of the second element
   left2 = element2.htmlElement.offsetLeft; //e2x
   top2 = element2.htmlElement.offsetTop; //e2y
   right2 = element2.htmlElement.offsetLeft + element2.htmlElement.offsetWidth;
-  tom2 = element2.htmlElement.offsetTop + element2.htmlElement.offsetHeight;
+  bottom2 = element2.htmlElement.offsetTop + element2.htmlElement.offsetHeight;
 
   //calculate the intersection of the two rectangles
   x_intersect = Math.max(0, Math.min(right1, right2) - Math.max(left1, left2));
