@@ -207,14 +207,15 @@ function updateBees() {
   moveBees();
 
   //use a fixed update period
-  let period = document.getElementById("periodTimer").value; //modify this to control refresh period
+  let period = document.getElementById("periodTimer").value;
 
-  // if (isHit.score >= 1000){
-  //   clearTimeout();
-  //   alert("Game over! YOu were stung 1000 times! Your score was:" + )
-  // }
   //update the timer for the next move
   updateTimer = setTimeout("updateBees()", period);
+
+  if (isHit.score >= 1000) {
+    clearTimeout();
+    alert("Game over! YOu were stung 1000 times! Your score was:");
+  }
 }
 
 function isHit(defender, offender) {
