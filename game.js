@@ -50,7 +50,7 @@ function start() {
   bear = new Bear();
 
   //take start time
-  lastStingTime = new Date();
+  lastStingTime = new Date(0);
 
   //create new array for bees
   bees = new Array();
@@ -231,15 +231,18 @@ function isHit(defender, offender) {
     hits.innerHTML = score;
 
     //calculate longest duration
-    let newStingTime = new Date();
+    let newStingTime = new Date(0);
     let thisDuration = newStingTime - lastStingTime;
     lastStingTime = newStingTime;
     let longestDuration = Number(duration.innerHTML);
     if (longestDuration === 0) {
       longestDuration = thisDuration;
     } else {
-      if (longestDuration < thisDuration) longestDuration = thisDuration;
+      if (longestDuration < thisDuration) {
+        longestDuration = thisDuration;
+      }
     }
+    console.log("DURATION " + longestDuration);
     document.getElementById("duration").innerHTML = longestDuration;
   }
 }
