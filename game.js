@@ -233,8 +233,10 @@ function isHit(defender, offender) {
     //calculate longest duration
     let newStingTime = new Date();
     let thisDuration = newStingTime - lastStingTime;
-    let longestDuration = Number(document.getElementById("duration").innerHTML);
-    if (longestDuration == 0) {
+    lastStingTime = newStingTime;
+    let longestDuration =
+      Number(document.getElementById("duration").innerHTML) * 1000;
+    if (longestDuration === 0) {
       longestDuration = thisDuration;
     } else {
       if (longestDuration < thisDuration) {
