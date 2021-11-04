@@ -205,10 +205,9 @@ function moveBees() {
 
 // update loop for game
 function updateBees() {
-  if (isHit.score >= 1000) {
+  if (isHit.score >= 100) {
     clearTimeout();
     alert("Game over! YOu were stung 1000 times! Your score was:");
-    console.log("You dead bro");
   }
 
   //move the bees randomly
@@ -223,12 +222,12 @@ function updateBees() {
 function isHit(defender, offender) {
   //check if the two image overlap
   if (overlap(defender, offender)) {
-    let score = Number(document.getElementById("hits").innerHTML);
+    isHit.score = Number(document.getElementById("hits").innerHTML);
     //increment the score
-    score = score + 1;
-    console.log(score);
+    isHit.score = isHit.score + 1;
+    console.log(isHit.score);
     //display the new score
-    document.getElementById("hits").innerHTML = score;
+    document.getElementById("hits").innerHTML = isHit.score;
 
     //calculate longest duration
     let newStingTime = new Date();
@@ -272,4 +271,9 @@ function overlap(element1, element2) {
   }
 
   return true;
+}
+
+function clearTimeout() {
+  document.getElementById("hits").innerHTML = 0;
+  document.getElementById("duration").innerHTML = 0;
 }
