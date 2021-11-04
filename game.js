@@ -50,7 +50,7 @@ function start() {
   bear = new Bear();
 
   //take start time
-  lastStingTime = new Date(0);
+  lastStingTime = new Date();
 
   //create new array for bees
   bees = new Array();
@@ -223,19 +223,18 @@ function updateBees() {
 function isHit(defender, offender) {
   //check if the two image overlap
   if (overlap(defender, offender)) {
-    let score = hits.innerHTML;
+    let score = Number(document.getElementById("hits").innerHTML);
     //increment the score
-    score = Number(score) + 1;
+    score = score + 1;
     console.log(score);
     //display the new score
-    hits.innerHTML = score;
+    document.getElementById("hits").innerHTML = score;
 
     //calculate longest duration
-    let newStingTime = new Date(0);
+    let newStingTime = new Date();
     let thisDuration = newStingTime - lastStingTime;
-    lastStingTime = newStingTime;
-    let longestDuration = Number(duration.innerHTML);
-    if (longestDuration === 0) {
+    let longestDuration = Number(document.getElementById("duration").innerHTML);
+    if (longestDuration == 0) {
       longestDuration = thisDuration;
     } else {
       if (longestDuration < thisDuration) {
@@ -243,7 +242,7 @@ function isHit(defender, offender) {
       }
     }
     console.log("DURATION " + longestDuration);
-    document.getElementById("duration").innerHTML = longestDuration;
+    document.getElementById("duration").innerHTML = longestDuration / 1000;
   }
 }
 

@@ -11,6 +11,9 @@
   height: 600px;
   width: 1200px;
   background-color: rgb(51, 204, 143);
+  background-image: url("/images/th.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   align-content: center;
   align-self: center;
 }
