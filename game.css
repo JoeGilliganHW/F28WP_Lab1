@@ -10,18 +10,21 @@
   position: absolute;
   height: 600px;
   width: 1200px;
-  background-color: rgb(6, 136, 119);
+  background-color: rgb(51, 204, 143);
   align-content: center;
   align-self: center;
 }
 
 #title {
-  background-color: rgb(128, 128, 128);
+  width: 1200px;
+  height: 300px;
+  background-color: rgb(96, 203, 255);
   align-content: center;
   align-self: center;
 }
 
 #scores {
+  width: 1200px;
   background-color: rgb(247, 134, 241);
   align-content: center;
   align-self: center;
